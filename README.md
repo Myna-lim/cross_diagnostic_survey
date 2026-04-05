@@ -141,9 +141,6 @@ The archive includes the files used during the development stage:
 - `dev_test_fold5_labels.csv`  
   → Internal test set used for model selection  
 
-- (optional) intermediate outputs  
-  → bootstrap results, item selection frequencies, or candidate combinations  
-
 ### Access
 
 The archive is encrypted and the password is not publicly distributed.
