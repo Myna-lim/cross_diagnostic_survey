@@ -1,7 +1,9 @@
 # cross_diagnostic_survey
 # Reproducibility Files for Final Lockbox Evaluation
 
-This repository provides the files for reproducing the final lockbox performance of the trained CatBoost models for the paper, “One item per disorder: a cross-diagnostic optimization framework for simulatneous prediction of six psychiatric disorders” which presents a cross-diagnostic survey reduction framework for multi-disorder prediction.
+This repository provides the files required to reproduce the final lockbox performance of the trained CatBoost models for the paper, “One item per disorder: a cross-diagnostic optimization framework for simultaneous prediction of six psychiatric disorders.” The study introduces a cross-diagnostic survey reduction framework that enables accurate multi-disorder prediction using a minimal set of representative items.
+
+---
 
 ## User guide
 
@@ -31,109 +33,139 @@ Open the `public_performance.ipynb` file in Jupyter Notebook.
 
 Execute each cell in sequence.
 
-This notebook will load the final selected features, the saved CatBoost models, and the final lockbox input data, and will reproduce the performance of the trained models on the lockbox dataset.
+This notebook loads the final selected features, trained CatBoost models, and lockbox evaluation data to reproduce the reported model performance.
 
-The notebook will generate a performance table containing the following metrics for each disorder:
+The notebook generates a performance table containing:
 
-- AUROC
-- AUPRC
-- Accuracy
+- AUROC  
+- AUPRC  
+- Accuracy  
 
-It will also report the macro-averaged performance across all six disorder prediction models.
+It also reports macro-averaged performance across all six disorder prediction models.
 
 ---
 
 ## File description
 
-- `public_performance.ipynb`: Jupyter notebook for reproducing the final lockbox performance using the trained CatBoost models
-- `lockbox_X_final.csv`: final lockbox feature matrix used for model evaluation; this file includes only the selected survey items and covariates used in the final models
-- `lockbox_Y.csv`: lockbox label file containing the binary outcome variables for the six target disorders
-- `final_selected_items.txt`: text file listing the final selected survey items used in the final cross-diagnostic model
-- `final_best_params.pkl`: saved hyperparameter set used for final model training
-- `catboost_DSI_final.pkl`: trained CatBoost model for DSI-SS outcome prediction
-- `catboost_PHQ_final.pkl`: trained CatBoost model for PHQ-9 outcome prediction
-- `catboost_GAD_final.pkl`: trained CatBoost model for GAD-7 outcome prediction
-- `catboost_PCL_final.pkl`: trained CatBoost model for PCL-5 outcome prediction
-- `catboost_PDSS_final.pkl`: trained CatBoost model for PDSS outcome prediction
-- `catboost_AUDIT_final.pkl`: trained CatBoost model for AUDIT outcome prediction
+- `public_performance.ipynb`: Reproduces final lockbox performance using trained CatBoost models  
+- `lockbox_X_final.csv`: Final lockbox feature matrix (selected items + covariates)  
+- `lockbox_Y.csv`: Lockbox labels for six psychiatric outcomes  
+- `final_selected_items.txt`: Final selected representative items (one per disorder)  
+- `final_best_params.pkl`: Final hyperparameters used for model training  
 
-### Label description in `lockbox_Y.csv`
+### Trained models
 
-This file contains the following binary outcome columns:
+- `catboost_DSI_final.pkl`: DSI-SS model  
+- `catboost_PHQ_final.pkl`: PHQ-9 model  
+- `catboost_GAD_final.pkl`: GAD-7 model  
+- `catboost_PCL_final.pkl`: PCL-5 model  
+- `catboost_PDSS_final.pkl`: PDSS model  
+- `catboost_AUDIT_final.pkl`: AUDIT model  
 
-- `DSI_group`: DSI-SS screening outcome
-- `PHQ_group`: PHQ-9 screening outcome
-- `GAD_group`: GAD-7 screening outcome
-- `PCL_group`: PCL-5 screening outcome
-- `PDSS_group`: PDSS screening outcome
-- `AUDIT_group`: AUDIT screening outcome
+---
 
-### Feature description in `lockbox_X_final.csv`
+## Label description (`lockbox_Y.csv`)
 
-This file contains the final selected survey items and covariates used in the trained models. These include:
+- `DSI_group`: Suicidality (DSI-SS)  
+- `PHQ_group`: Depression (PHQ-9)  
+- `GAD_group`: Anxiety (GAD-7)  
+- `PCL_group`: PTSD (PCL-5)  
+- `PDSS_group`: Panic disorder (PDSS)  
+- `AUDIT_group`: Alcohol use (AUDIT)  
 
-- one selected representative item from each psychiatric instrument
-- `Sex`
-- `Age`
+---
 
-The exact selected item names are listed in `final_selected_items.txt`.
+## Feature description (`lockbox_X_final.csv`)
+
+This file contains:
+
+- One selected representative item from each psychiatric instrument  
+- Covariates: `Sex`, `Age`  
+
+The exact selected items are listed in `final_selected_items.txt`.
 
 ---
 
 ## Required packages
 
-This repository was prepared using Python 3 and Jupyter Notebook.
+This repository was developed using Python 3 and Jupyter Notebook.
 
-Required Python packages:
+Required packages:
 
-- `pandas`
-- `numpy`
-- `joblib`
-- `scikit-learn`
-- `catboost`
-
-All files can be executed if the user has installed Python 3, Jupyter Notebook, and the required Python packages listed above.
+- pandas  
+- numpy  
+- joblib  
+- scikit-learn  
+- catboost  
 
 ---
 
 ## Expected outcome and run time
 
-`public_performance.ipynb` consists of a small number of cells for:
+`public_performance.ipynb` performs inference only and does not include model training.
 
-- loading the final lockbox data
-- loading the trained CatBoost models
-- calculating predicted probabilities
-- reproducing AUROC, AUPRC, and Accuracy for each disorder
+It:
 
-Run time depends on the user environment and hardware, but the notebook is expected to run quickly because it performs inference only and does not repeat model development or hyperparameter tuning.
+- Loads final data and models  
+- Computes predicted probabilities  
+- Reproduces AUROC, AUPRC, and Accuracy  
+
+Execution time is minimal and depends on system specifications.
 
 ---
 
-## Notes on private development files
+## Development-stage files (encrypted archive)
 
-This public repository is intended only to reproduce the final model performance on the final prepared lockbox evaluation files.
+An encrypted archive containing development-stage materials is included in this repository:
 
-The notebook used during the development stage for survey item reduction, bootstrap-based item selection, and hyperparameter selection is not included in the public repository.
+- `development_final_survey.zip`
 
-The following files were used only during the development stage and are maintained privately:
+This archive is password-protected and is **not required** to reproduce the final results presented in this repository.
 
-- `development_final_survey.ipynb`
-- `dev_train_folds1to3_data.csv`
-- `dev_train_folds1to3_labels.csv`
-- `dev_val_fold4_data.csv`
-- `dev_val_fold4_labels.csv`
-- `dev_test_fold5_data.csv`
-- `dev_test_fold5_labels.csv`
-- intermediate bootstrap and item-selection outputs, if applicable
+### Contents of the encrypted archive
 
-These private development-stage files are not required to run the public notebook or reproduce the final reported lockbox performance.
+The archive includes the files used during the development stage:
+
+- `development_final_survey.ipynb`  
+  → Full pipeline for survey item selection, bootstrap optimization, and hyperparameter tuning  
+
+- `dev_train_folds1to3_data.csv`  
+- `dev_train_folds1to3_labels.csv`  
+  → Development training set used for item selection  
+
+- `dev_val_fold4_data.csv`  
+- `dev_val_fold4_labels.csv`  
+  → Validation set used for hyperparameter tuning  
+
+- `dev_test_fold5_data.csv`  
+- `dev_test_fold5_labels.csv`  
+  → Internal test set used for model selection  
+
+- (optional) intermediate outputs  
+  → bootstrap results, item selection frequencies, or candidate combinations  
+
+### Access
+
+The archive is encrypted and the password is not publicly distributed.
+
+Access can be provided by the authors upon reasonable request.
+
+---
+
+## Notes
+
+This repository is designed to reproduce the final model performance on the lockbox dataset only.
+
+The development-stage pipeline is separated to:
+
+- maintain clarity of the reproducibility workflow  
+- prevent data leakage between development and evaluation stages  
+- align with standard practices for machine learning reproducibility  
 
 ---
 
 ## Reference
 
-This repository contains the files necessary to reproduce the final performance of the trained models using the final prepared lockbox data and saved CatBoost models.
+[Authors]. *One item per disorder: a cross-diagnostic optimization framework for simultaneous prediction of six psychiatric disorders.* (Under review / In submission).
 
-For questions regarding the development-stage item selection pipeline or access to private intermediate files, please contact the corresponding author.
-
-
+For questions regarding the development pipeline or access to encrypted materials, please contact the corresponding author.
